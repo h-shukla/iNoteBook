@@ -3,7 +3,7 @@ const mongoURI = "mongodb://localhost:27017/?readPreference=primary&appname=Mong
 
 // function to establish connection to mongodb
 const connectMongo = () => {
-    mongoose.connect(mongoURI, ()=> {
+    mongoose.connect(mongoURI, () => {
         console.log('Connected to Mongo successfully');
     });
 };
