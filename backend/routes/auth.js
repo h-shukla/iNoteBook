@@ -45,22 +45,62 @@ router.post(
 
 			// JWT authentication
 			const data = {
-				user:{
+				user: {
 					'id': user.id
 				}
 			}
 			const authToken = jwt.sign(data, JWT_SECRET);
-			
+
 			// respond with relevant information
 			// return res.json(user);
-			res.json({authToken});
+			res.json({ authToken });
 
 		} catch (error) {
 			// ideally we put it in logger/SQS(simple queue service)
 			console.error(error.message);
-			return res.status(500).send("Some error ocurred");
+			return res.status(500).send("Internal server error");
 		}
 	}
 );
+
+// Authenticate a user using: POST "/api/auth/login". No login required
+router.post('/login', [
+	body("email", "Enter a valida email").isEmail(),
+	body("password", "Password cannot be blank").exists(),
+], async (req, res) => {
+	const errors = validationResult(req);
+	if (!errors.isEmpty()) {
+		return res.status(400).json({ errors: errors.array() });
+	}
+
+	// Using destructuring
+	const {email, password} = req.body;
+	try {
+		// Checking for email
+		let user = await User.findOne({email});
+		if (!user) {
+			res.status(400).json({error: 'Please try to login with correct credintials'});
+		}
+		// Checking for password
+		const passwordCompare = await bcrypt.compare(password, user.password);
+		if (!passwordCompare) {
+			return res.status(400).json({error: 'Please try to login with correct credintials'});
+		}
+		// JWT authentication
+		const data = {
+			user: {
+				id: user.id
+			}
+		}
+		const authToken = jwt.sign(data, JWT_SECRET);
+		res.json({ authToken });
+
+	} catch (error) {
+		// ideally we put it in logger/SQS(simple queue service)
+		console.error(error.message);
+		res.status(500).send("Internal server error");
+	}
+
+})
 
 module.exports = router;
