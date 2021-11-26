@@ -4,9 +4,12 @@ const router = express.Router();
 const { body, validationResult } = require("express-validator");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fetchuser = require('../middleware/fetchuser');
 
+// Should be kept in env variable
 const JWT_SECRET = 'haleluyah';
 
+// Route 1:
 // Create a user using: POST "/api/auth/createuser". No login required
 router.post(
 	"/createuser",
@@ -48,12 +51,12 @@ router.post(
 				user: {
 					'id': user.id
 				}
-			}
+			};
 			const authToken = jwt.sign(data, JWT_SECRET);
 
 			// respond with relevant information
 			// return res.json(user);
-			res.json({ authToken });
+			return res.json({ authToken });
 
 		} catch (error) {
 			// ideally we put it in logger/SQS(simple queue service)
@@ -63,6 +66,7 @@ router.post(
 	}
 );
 
+// Route 2:
 // Authenticate a user using: POST "/api/auth/login". No login required
 router.post('/login', [
 	body("email", "Enter a valida email").isEmail(),
@@ -74,33 +78,47 @@ router.post('/login', [
 	}
 
 	// Using destructuring
-	const {email, password} = req.body;
+	const { email, password } = req.body;
 	try {
 		// Checking for email
-		let user = await User.findOne({email});
+		let user = await User.findOne({ email });
 		if (!user) {
-			res.status(400).json({error: 'Please try to login with correct credintials'});
+			res.status(400).json({ error: 'Please try to login with correct credintials' });
 		}
 		// Checking for password
 		const passwordCompare = await bcrypt.compare(password, user.password);
 		if (!passwordCompare) {
-			return res.status(400).json({error: 'Please try to login with correct credintials'});
+			return res.status(400).json({ error: 'Please try to login with correct credintials' });
 		}
 		// JWT authentication
 		const data = {
 			user: {
 				id: user.id
 			}
-		}
+		};
 		const authToken = jwt.sign(data, JWT_SECRET);
-		res.json({ authToken });
+		return res.json({ authToken });
 
 	} catch (error) {
 		// ideally we put it in logger/SQS(simple queue service)
 		console.error(error.message);
-		res.status(500).send("Internal server error");
+		return res.status(500).send("Internal server error");
 	}
 
+});
+
+// Route 3:
+// Get logged in user Details using: POST "/api/auth/getuser". No login required
+router.post('/getuser', fetchuser,async (req, res) => {
+	try {
+		const userId = req.user.id;
+		const user = await User.findById(userId).select('-passowrd');
+		res.send(user);
+	} catch (error) {
+		// ideally we put it in logger/SQS(simple queue service)
+		console.error(error.message);
+		return res.status(500).send("Internal server error");
+	}
 })
 
 module.exports = router;
