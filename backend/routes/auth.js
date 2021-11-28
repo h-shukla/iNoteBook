@@ -109,7 +109,7 @@ router.post('/login', [
 
 // Route 3:
 // Get logged in user Details using: POST "/api/auth/getuser". No login required
-router.post('/getuser', fetchuser,async (req, res) => {
+router.post('/getuser', fetchuser, async (req, res) => {
 	try {
 		const userId = req.user.id;
 		const user = await User.findById(userId).select('-passowrd');

@@ -9,3 +9,4 @@
 - The passwords of users are stored in encrypted format using `bcryptjs`
 - It provides security to the users' personal notes
 - It uses `jwt` for authentication of users
+- Login information is passed with auth-token in the header
