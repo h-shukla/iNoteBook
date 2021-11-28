@@ -33,7 +33,7 @@ router.post("/addnote", fetchuser, [
 
         const notes = new Notes({
             title, description, tag, user: req.user.id
-        })
+        });
         const savedNote = await notes.save();
 
         res.json(savedNote);
@@ -51,17 +51,17 @@ router.put("/updatenote/:id", fetchuser, async (req, res) => {
     try {
         // Create a new note object
         const newNote = {};
-        if (title) { newNote.title = title };
-        if (description) { newNote.description = description };
-        if (tag) { newNote.tag = tag };
-    
+        if (title) { newNote.title = title; };
+        if (description) { newNote.description = description; };
+        if (tag) { newNote.tag = tag; };
+        
         // Find the note to be updated
         let note = await Notes.findById(req.params.id);
         if (!note) {
             res.status(404).send("Not Found");
         }
         if (note.user.toString() != req.user.id) {
-            return res.status(401).send("Not Allowed")
+            return res.status(401).send("Not Allowed");
         }
         note = await Notes.findByIdAndUpdate(req.params.id, { $set: newNote }, { new: true });
         res.json(note);
@@ -83,7 +83,7 @@ router.delete("/deletenote/:id", fetchuser, async (req, res) => {
         }
         // Allow deletion only if user owns this note
         if (note.user.toString() != req.user.id) {
-            return res.status(401).send("Not Allowed")
+            return res.status(401).send("Not Allowed");
         }
         note = await Notes.findByIdAndDelete(req.params.id);
         res.json({ success: "Note has been deleted", note: note });
