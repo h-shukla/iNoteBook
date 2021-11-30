@@ -113,12 +113,12 @@ router.post('/getuser', fetchuser, async (req, res) => {
     try {
 	const userId = req.user.id;
 	const user = await User.findById(userId).select('-passowrd');
-	res.send(user);
+	return res.send(user);
     } catch (error) {
 	// ideally we put it in logger/SQS(simple queue service)
 	console.error(error.message);
 	return res.status(500).send("Internal server error");
     }
-})
+});
 
 module.exports = router;
