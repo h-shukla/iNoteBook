@@ -10,3 +10,6 @@
 - It provides security to the users' personal notes
 - It uses `jwt` for authentication of users
 - Login information is passed with auth-token in the header
+
+# Frontend
+- It connects well with backend to provide user exceptional experience
