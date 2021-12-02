@@ -13,3 +13,9 @@
 
 # Frontend
 - It connects well with backend to provide user exceptional experience
+
+
+
+TODO:
+1. Add some users and get their access token
+1. Then Continue watching the video
