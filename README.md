@@ -13,7 +13,7 @@
 
 # Frontend
 - It connects well with backend to provide user exceptional experience
+- It utilizes react features like `useLocation`, `context api`, etc.
 
 TODO:
-1. Add some users and get their access token
-1. Then Continue watching the video
+1. Continue with video 65
