@@ -14,6 +14,3 @@
 # Frontend
 - It connects well with backend to provide user exceptional experience
 - It utilizes react features like `useLocation`, `context api`, etc.
-
-TODO:
-1. Continue with video 65
