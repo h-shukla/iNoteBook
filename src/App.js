@@ -16,7 +16,7 @@ function App() {
             <NoteState>
                 <Router>
                     <Navbar />
-                    <Alert message="This is a website made with reactjs"/>
+                    <Alert message="This is a website made with reactjs" />
                     <div className="container">
                         <Routes>
                             <Route exact path="/" element={<Home />} />
