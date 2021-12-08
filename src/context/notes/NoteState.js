@@ -65,17 +65,16 @@ const NoteState = (props) => {
 	// Edit a note
 	const editNote = async (id, title, description, tag) => {
 		// API call done here
-		const url = `${host}/api/notes/updatenote/${id}`;
-		const data = { title, description, tag };
+		const url = `${host}/api/notes/updatenote/${id}`
 		const response = await fetch(url, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
 				'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFhOTI4MDg2ZGExNTEyYTdiZTAxNDRkIn0sImlhdCI6MTYzODQ3NTg3OH0.UpcJ9mrshLtfIlwDfHciQMWp8TB_oQt-6hFg5FF_0Iw'
 			},
-			body: JSON.stringify(data)
+			body: JSON.stringify({title, description, tag})
 		});
-		const jsonData = response.json();
+		const jsonData = await response.json();
 		console.log(jsonData);
 
 		for (let i = 0; i < notes.length; i++) {

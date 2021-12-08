@@ -24,7 +24,8 @@ const Notes = () => {
 
     const handleClick = (e) => {
         console.log("Updating the note " + note);
-        editNote(note.id, note.title, note.description, note.tag);
+        editNote(note.id, note.etitle, note.edescription, note.etag);
+        getNotes();
         closeRef.current.click();
     };
 
@@ -65,7 +66,7 @@ const Notes = () => {
                         </div>
                         <div className="modal-footer">
                             <button ref={closeRef} type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" className="btn btn-primary" onClick={handleClick} >Save changes</button>
+                            <button type="button" className="btn btn-primary" onClick={handleClick}>Save changes</button>
                         </div>
                     </div>
                 </div>
