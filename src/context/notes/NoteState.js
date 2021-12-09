@@ -16,7 +16,7 @@ const NoteState = (props) => {
 	    },
 	});
 	const json = await response.json();
-	console.log(json);
+	// console.log(json);
 	setNotes(json);
     };
 
@@ -30,8 +30,8 @@ const NoteState = (props) => {
 	    },
 	    body: JSON.stringify({ title, description, tag })
 	});
-	const jsonData = response.json();
-	console.log('adding note ' + jsonData);
+        // eslint-disable-next-line
+	const json = response.json();
 	const note = {
 	    "title": title,
 	    "description": description,
@@ -47,7 +47,6 @@ const NoteState = (props) => {
     // Delete a note
     const deleteNote = async (id) => {
 	// API call
-	console.log('deleting the note with id ' + id);
 	const url = `${host}/api/notes/deletenote/${id}`;
 	const response = await fetch(url, {
 	    method: 'DELETE',
@@ -56,8 +55,8 @@ const NoteState = (props) => {
 		'auth-token': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjFhOTI4MDg2ZGExNTEyYTdiZTAxNDRkIn0sImlhdCI6MTYzODQ3NTg3OH0.UpcJ9mrshLtfIlwDfHciQMWp8TB_oQt-6hFg5FF_0Iw'
 	    },
 	});
+        // eslint-disable-next-line
 	const json = response.json();
-	console.log(json);
 	const newNotes = notes.filter((note) => { return note._id !== id; });
 	setNotes(newNotes);
     };
@@ -74,8 +73,8 @@ const NoteState = (props) => {
 	    },
 	    body: JSON.stringify({title, description, tag})
 	});
-	const jsonData = await response.json();
-	console.log(jsonData);
+        // eslint-disable-next-line
+	const json = await response.json();
 
 	for (let i = 0; i < notes.length; i++) {
 	    const element = notes[i];

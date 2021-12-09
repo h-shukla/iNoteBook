@@ -24,7 +24,7 @@ const Notes = () => {
     };
 
     const handleClick = (e) => {
-        console.log("Updating the note " + note);
+        // console.log("Updating the note " + note);
         editNote(note.id, note.etitle, note.edescription, note.etag);
         getNotes();
         closeRef.current.click();
@@ -88,3 +88,4 @@ const Notes = () => {
 
 export default Notes;
 
+// minLength is required to resolve cors policy error

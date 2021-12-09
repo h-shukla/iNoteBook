@@ -13,18 +13,18 @@ import Alert from "./components/Alert";
 function App() {
     return (
         <>
-            <NoteState>
-                <Router>
-                    <Navbar />
-                    <Alert message="This is a website made with reactjs" />
-                    <div className="container">
-                        <Routes>
-                            <Route exact path="/" element={<Home />} />
-                            <Route exact path="/about" element={<About />} />
-                        </Routes>
-                    </div>
-                </Router>
-            </NoteState>
+          <NoteState>
+            <Router>
+              <Navbar />
+              <Alert message="This is a website made with reactjs" />
+              <div className="container">
+                <Routes>
+                  <Route exact path="/" element={<Home />} />
+                  <Route exact path="/about" element={<About />} />
+                </Routes>
+              </div>
+            </Router>
+          </NoteState>
         </>
     );
 }
