@@ -15,4 +15,4 @@
 - It connects well with backend to provide user exceptional experience
 - It utilizes react features like `useLocation`, `context api`, etc.
 
-**Continue halfway through with video 69**
+**Continue halfway through with video 70**
