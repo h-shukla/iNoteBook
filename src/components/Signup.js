@@ -49,8 +49,8 @@ const Signup = () => {
               <input type="password" className="form-control" id="password" onChange={onChange} name="password" minLength={5} required/>
             </div>
             <div className="mb-3">
-              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-              <input type="confirmPassword" className="form-control" id="confirmPassword" onChange={onChange} name="confirmPassword" minLength={5} required/>
+              <label htmlFor="password" className="form-label">Confirm Password</label>
+              <input type="password" className="form-control" id="confirmPassword" onChange={onChange} name="confirmPassword" minLength={5} required/>
             </div>
             <button type="submit" className="btn btn-primary" onClick={handleSubmit} >Submit</button>
           </form>

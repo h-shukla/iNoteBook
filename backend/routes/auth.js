@@ -30,6 +30,7 @@ router.post(
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(400).json({
+                success: false,
                 errors: errors.array()
             });
         }
@@ -43,6 +44,7 @@ router.post(
                 return res
                     .status(400)
                     .json({
+                        success: false,
                         error: "sorry user with this email already exists",
                     });
             }
@@ -67,6 +69,7 @@ router.post(
             // respond with relevant information
             // return res.json(user);
             return res.json({
+                success: true,
                 authToken
             });
 
