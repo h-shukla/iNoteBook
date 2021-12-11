@@ -14,5 +14,3 @@
 # Frontend
 - It connects well with backend to provide user exceptional experience
 - It utilizes react features like  `useState`, `useLocation`, `context api`, `useNavigate`, `useEffect`, `useRef`, etc.
-
-**Continue halfway through with video 70**
