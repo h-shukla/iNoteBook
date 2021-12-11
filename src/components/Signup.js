@@ -21,7 +21,7 @@ const Signup = (props) => {
         // handling the API response
         if (json.success) {
             // save the auth-token and redirect
-            localStorage.setItem('token', json.authtoken);
+            localStorage.setItem('token', json.authToken);
             navigate('../', { replace: true });
         } else {
             props.showAlert('Invalid credintials', 'danger');
